@@ -1,5 +1,5 @@
 # Undercomplicated: The Trilogy No One Asked For 
-## **UNG Goldrush Gauntlet 2026 CTF** <img src="Pasted image 20260315024345.png" width="250" align="right" style="margin-left: 15px; margin-top: -20px;">
+## **UNG Goldrush Gauntlet 2026 CTF** <img src="https://ung.ctfd.io/files/d51518effaa56c3a577542b076816016/logo-transparent.png" width="250" align="right" style="margin-left: 15px; margin-top: -20px;">
 
 **Solves:** 6 (Least Solved Challenge)
 **Points:** 100
