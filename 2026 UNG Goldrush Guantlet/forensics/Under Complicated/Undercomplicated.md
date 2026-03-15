@@ -19,7 +19,7 @@
 One file: `undercomplicated_part3.png`. 6144x4096 PNG, about 72MB. Looks like a normal photo from first glance... a very large... but sure... normal photo, nothing sus!
 ## Recon
 
-We of course run through the usual toolkit:
+We, of course, run through the usual toolkit:
 
 * `exiftool`: nothing interesting in metadata, standard PNG headers
 * `binwalk`: no embedded files, no hidden archives
@@ -55,7 +55,7 @@ Scanned the entire image for blocks containing these deviations and found a clus
 
 The extraction logic sounds simple: for each pixel in the region, figure out the true background color of its 4x4 block and mark any pixel that doesn't match. But there's a subtle catch.
 
-The text spans rows y=3154-3158, which crosses two 4x4 block rows. In the second block row (y=3156-3159), three out of four rows contain text pixels. In dense character columns, the text pixels actually outnumber the background pixels, so a simple majority vote picks the text color as "background" and inverts the extraction. Therefore characters like 'g' and portions of "Again" came out garbled in some attempts. 
+The text spans rows y=3154-3158, which crosses two 4x4 block rows. In the second block row (y=3156-3159), three out of four rows contain text pixels. In dense character columns, the text pixels actually outnumber the background pixels, so a simple majority vote picks the text color as "background" and inverts the extraction. Therefore, characters like 'g' and portions of "Again" came out garbled in some attempts. 
 
 The fix: use y=3159 (the bottom row of the block, guaranteed to have no text) as a per-pixel reference for the true background color. Any pixel at the same x-position that differs from its y=3159 counterpart by more than 3 units is marked as text.
 
@@ -84,8 +84,8 @@ for y in range(y_start, y_end):
         pixel = tuple(data[y, x])
 
         if by == 3156:
-            # this block row has 3/4 rows of text so majority vote
-            # flips on us. use y=3159 (no text) as the reference instead
+            # this block row has 3/4 rows of text, so majority vote
+            # flips on us. Use y=3159 (no text) as the reference instead
             ref = tuple(data[3159, x])
             diff = sum(abs(int(a) - int(b)) for a, b in zip(pixel, ref))
             is_text = diff > 3
