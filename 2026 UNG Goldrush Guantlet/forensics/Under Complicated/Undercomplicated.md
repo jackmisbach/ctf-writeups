@@ -1,12 +1,19 @@
 # Undercomplicated: The Trilogy No One Asked For 
-## **UNG Goldrush Gauntlet 2026 CTF** <img src="https://ung.ctfd.io/files/d51518effaa56c3a577542b076816016/logo-transparent.png" width="250" align="right" style="margin-left: 15px; margin-top: -20px;">
+## **UNG Goldrush Gauntlet 2026 CTF** 
+<img src="https://github.com/user-attachments/assets/c3c72957-26dd-4069-b583-43c39b7dda69" width="250" align="right" style="margin-left: 15px; margin-top: -20px;">
 
 **Solves:** 6 (Least Solved Challenge)
+
 **Points:** 100
+
 **Challenge Author:** Pac
+
 **Category:** Forensics
+
 **Description:** People complained about this challenge last year. We have simplified it even further. If you can't find it... try looking closer (and trying harder lel).
+
 **Flag:** `ggctf{Found_Me_Again!!}`
+
 ## What We're Working With
 
 One file: `undercomplicated_part3.png`. 6144x4096 PNG, about 72MB. Looks like a normal photo from first glance... a very large... but sure... normal photo, nothing sus!
@@ -65,7 +72,6 @@ data = np.array(img)
 
 x_start, x_end = 4837, 4940
 y_start, y_end = 3152, 3164
-
 h = y_end - y_start
 w = x_end - x_start
 bitmap = []
@@ -92,20 +98,22 @@ for y in range(y_start, y_end):
         row.append(1 if is_text else 0)
     bitmap.append(row)
 
-# Optional: minor pixel corrections on 'g' center and 'i' crossbar # for cleaner rendering, but the flag is clearly readable without them
+# Optional: minor pixel corrections on 'g' center and 'i' crossbar 
+# for cleaner rendering, but the flag is clearly readable without them
 
 # render at 20x scale
 out = Image.new('L', (w, h))
 for y in range(h):
     for x in range(w):
         out.putpixel((x, y), 0 if bitmap[y][x] else 255)
-
 out.resize((w * 20, h * 20), Image.NEAREST).save('extracted_flag.png')
 ```
 
+---
+
 Result:
 
-![[Pasted image 20260315021439.png]]
+<img width="2060" height="240" alt="Image" src="https://github.com/user-attachments/assets/7d82fed6-3e5a-4805-8130-aeb65eb55801" />
 
 We can now clearly read the flag!
 
